@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Levolution.Resources
 {
@@ -14,7 +15,17 @@ namespace Levolution.Resources
             foreach(var kv in keyValuePairs) { Write(kv.Key, kv.Value); }
         }
 
-        public T Load<T>(TResourceIdentifier id) => _dictionary.TryGetValue(id, out object value) && value is T result ? result : default;
+        public Task<LoadingResult<T>> LoadAsync<T>(TResourceIdentifier id)
+        {
+            if (_dictionary.TryGetValue(id, out object value))
+            {
+                return Task.FromResult((value is T result) 
+                    ? new LoadingResult<T>(result)
+                    : LoadingResult<T>.Failure
+                );
+            }
+            return Task.FromResult(LoadingResult<T>.NotFound);
+        }
 
         public void Write<T>(TResourceIdentifier id, T value) => _dictionary[id] = value;
     }

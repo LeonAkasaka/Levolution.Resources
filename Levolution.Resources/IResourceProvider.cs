@@ -1,7 +1,9 @@
-﻿namespace Levolution.Resources
+﻿using System.Threading.Tasks;
+
+namespace Levolution.Resources
 {
     public interface IResourceProvider<TResourceIdentifier>
     {
-        T Load<T>(TResourceIdentifier id);
+        Task<LoadingResult<T>> LoadAsync<T>(TResourceIdentifier id);
     }
 }
