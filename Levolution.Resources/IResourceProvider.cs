@@ -4,6 +4,6 @@ namespace Levolution.Resources
 {
     public interface IResourceProvider<TResourceIdentifier>
     {
-        Task<LoadingResult<T>> LoadAsync<T>(TResourceIdentifier id);
+        Task<ResourceResult<T>> LoadAsync<T>(TResourceIdentifier id);
     }
 }

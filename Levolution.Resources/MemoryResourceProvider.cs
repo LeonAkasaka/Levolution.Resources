@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Levolution.Resources
 {
-    public class MemoryResourceProvider<TResourceIdentifier> : IResourceProvider<TResourceIdentifier>
+    public class MemoryResourceProvider<TResourceIdentifier> : IResourceProvider<TResourceIdentifier>, IResourceStore<TResourceIdentifier>
     {
         private Dictionary<TResourceIdentifier, object> _dictionary = new Dictionary<TResourceIdentifier, object>();
 
@@ -12,7 +11,10 @@ namespace Levolution.Resources
 
         public MemoryResourceProvider(IEnumerable<KeyValuePair<TResourceIdentifier, object>> keyValuePairs)
         {
-            foreach(var kv in keyValuePairs) { Write(kv.Key, kv.Value); }
+            foreach(var kv in keyValuePairs)
+            {
+                _dictionary[kv.Key] = kv.Value;
+            }
         }
 
         public Task<ResourceResult<T>> LoadAsync<T>(TResourceIdentifier id)
@@ -27,6 +29,10 @@ namespace Levolution.Resources
             return Task.FromResult(ResourceResult<T>.NotFound);
         }
 
-        public void Write<T>(TResourceIdentifier id, T value) => _dictionary[id] = value;
+        public Task<ResourceResult<T>> Store<T>(TResourceIdentifier id, T value)
+        {
+            _dictionary[id] = value;
+            return Task.FromResult(new ResourceResult<T>(value));
+        }
     }
 }
