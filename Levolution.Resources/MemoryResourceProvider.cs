@@ -29,7 +29,7 @@ namespace Levolution.Resources
             return Task.FromResult(ResourceResult<T>.NotFound);
         }
 
-        public Task<ResourceResult<T>> Store<T>(TResourceIdentifier id, T value)
+        public Task<ResourceResult<T>> StoreAsync<T>(TResourceIdentifier id, T value)
         {
             _dictionary[id] = value;
             return Task.FromResult(new ResourceResult<T>(value));

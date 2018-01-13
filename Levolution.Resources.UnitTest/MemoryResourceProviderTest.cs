@@ -15,8 +15,8 @@ namespace Levolution.Resources.UnitTest
             var value1 = "Stand by Ready!";
             var value2 = new Uri("https://github.com/LeonAkasaka/Levolution.Resources");
 
-            await rp.Store(1, value1);
-            await rp.Store(2, value2);
+            await rp.StoreAsync(1, value1);
+            await rp.StoreAsync(2, value2);
 
             var r1 = await rp.LoadAsync<string>(1);
             Assert.AreEqual(ResourceState.Success, r1.ResourceState);

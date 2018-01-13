@@ -4,6 +4,6 @@ namespace Levolution.Resources
 {
     public interface IResourceStore<TResourceIdentifier>
     {
-        Task<ResourceResult<T>> Store<T>(TResourceIdentifier id, T resource);
+        Task<ResourceResult<T>> StoreAsync<T>(TResourceIdentifier id, T resource);
     }
 }
