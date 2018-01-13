@@ -3,7 +3,7 @@
     /// <summary>
     /// 
     /// </summary>
-    public enum LoadingState
+    public enum ResourceState
     {
         /// <summary>
         /// Default value.
@@ -17,7 +17,7 @@
         Success,
 
         /// <summary>
-        /// Load failed.
+        /// Failed.
         /// </summary>
         Failure,
 

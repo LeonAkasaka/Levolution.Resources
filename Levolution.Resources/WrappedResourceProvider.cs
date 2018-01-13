@@ -8,7 +8,7 @@ namespace Levolution.Resources
 
         public WrappedResourceProvider(IResourceProvider<TResourceIdentifier> provider) => InnerResourceProvider = provider;
 
-        public async Task<LoadingResult<T>> LoadAsync<T>(TResourceIdentifier id)
+        public async Task<ResourceResult<T>> LoadAsync<T>(TResourceIdentifier id)
         {
             OnLoading();
             var r = await LoadFromInnerResourceProvider<T>(id);
@@ -19,7 +19,7 @@ namespace Levolution.Resources
 
         protected virtual void OnLoading() { }
 
-        protected virtual Task<LoadingResult<T>> LoadFromInnerResourceProvider<T>(TResourceIdentifier id) => InnerResourceProvider.LoadAsync<T>(id);
+        protected virtual Task<ResourceResult<T>> LoadFromInnerResourceProvider<T>(TResourceIdentifier id) => InnerResourceProvider.LoadAsync<T>(id);
 
         protected virtual void OnLoaded() { }
 

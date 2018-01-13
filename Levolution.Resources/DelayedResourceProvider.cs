@@ -16,7 +16,7 @@ namespace Levolution.Resources
             Delay = delay;
         }
 
-        protected override async Task<LoadingResult<T>> LoadFromInnerResourceProvider<T>(TResourceIdentifier id)
+        protected override async Task<ResourceResult<T>> LoadFromInnerResourceProvider<T>(TResourceIdentifier id)
         {
             await Task.Delay(Delay);
             return await base.LoadFromInnerResourceProvider<T>(id); ;

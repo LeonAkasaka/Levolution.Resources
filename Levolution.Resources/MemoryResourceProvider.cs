@@ -15,16 +15,16 @@ namespace Levolution.Resources
             foreach(var kv in keyValuePairs) { Write(kv.Key, kv.Value); }
         }
 
-        public Task<LoadingResult<T>> LoadAsync<T>(TResourceIdentifier id)
+        public Task<ResourceResult<T>> LoadAsync<T>(TResourceIdentifier id)
         {
             if (_dictionary.TryGetValue(id, out object value))
             {
                 return Task.FromResult((value is T result) 
-                    ? new LoadingResult<T>(result)
-                    : LoadingResult<T>.Failure
+                    ? new ResourceResult<T>(result)
+                    : ResourceResult<T>.Failure
                 );
             }
-            return Task.FromResult(LoadingResult<T>.NotFound);
+            return Task.FromResult(ResourceResult<T>.NotFound);
         }
 
         public void Write<T>(TResourceIdentifier id, T value) => _dictionary[id] = value;

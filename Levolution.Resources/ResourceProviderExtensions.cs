@@ -7,7 +7,7 @@ namespace Levolution.Resources
         public static async Task<T> LoadOrDefault<TResourceIdentifier, T>(this IResourceProvider<TResourceIdentifier> resourceProvider, TResourceIdentifier id)
         {
             var r = await resourceProvider.LoadAsync<T>(id);
-            return r.LoadingState == LoadingState.Success ? r.Value : default(T);
+            return r.ResourceState == ResourceState.Success ? r.Value : default(T);
         }
     }
 }
