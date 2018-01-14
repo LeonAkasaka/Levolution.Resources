@@ -23,7 +23,7 @@ namespace Levolution.Resources
                 }
                 return ResourceResult<T>.Failure;
             }
-            catch(FileNotFoundException e)
+            catch(FileNotFoundException)
             {
                 return ResourceResult<T>.NotFound;
             }
