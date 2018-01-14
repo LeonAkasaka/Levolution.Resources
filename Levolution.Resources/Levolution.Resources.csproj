@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net46</TargetFrameworks>
+    <PostBuildEvent Condition="'$(TargetFramework)' == 'net46'">copy Levolution.Resources.dll ..\..\..\..\Levolution.Resources.Unity\Assets\Levolution.Resources.dll</PostBuildEvent>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
-
 </Project>
